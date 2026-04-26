@@ -1,0 +1,13 @@
+# Axiom Hive - Dependency Manifest
+# Framework: Axiom Hive
+# Creator: Nicholas Michael Grossi (Alias: Alexis Adams)
+
+# No external dependencies required for core functionality.
+# The Axiom Hive framework operates using Python standard library exclusively.
+# This design ensures minimal attack surface and maximum portability.
+
+# Optional development dependencies:
+# pytest>=7.0.0        # For test execution
+# black>=22.0.0        # For code formatting
+# mypy>=0.950          # For static type checking
+
