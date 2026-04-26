@@ -1,4 +1,4 @@
-Support and Contact
+# Support and Contact
 
 For support or general inquiries:
 

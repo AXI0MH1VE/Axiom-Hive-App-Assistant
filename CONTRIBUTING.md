@@ -1,4 +1,4 @@
-Contributing to Axiom Hive
+# Contributing
 
 Thank you for your interest in contributing. This document explains how to contribute in a way that preserves the framework's integrity and respects the author's attribution requirements.
 

@@ -1,0 +1,147 @@
+# Curated Knowledge Corpus Manifest
+# This file defines all approved knowledge sources for retrieval
+
+corpus_version: "2024.06.1"
+generated_at: "2024-06-30T00:00:00Z"
+
+corpus_sources:
+  - id: "wikipedia_202406"
+    name: "Wikipedia English Articles with Citations"
+    type: "vector_store"
+    description: "Filtered subset of Wikipedia articles containing verifiable citations"
+    path: "knowledge/embeddings/wikipedia_202406.faiss"
+    metadata: "knowledge/processed/wikipedia_202406_meta.jsonl"
+    raw_source: "knowledge/raw/wikipedia_202406/"
+    sha256: "PLACEHOLDER_SHA256_FOR_INDEX"
+    document_count: 6234500
+    embedding_model: "all-MiniLM-L6-v2"
+    embedding_dim: 384
+    index_type: "Flat"
+    license: "CC-BY-SA-4.0"
+    attribution_required: true
+    enabled: true
+    freshness_days: 90
+    last_updated: "2024-06-30T00:00:00Z"
+    size_gb: 5.2
+    access_level: "public"
+    domain_tags:
+      - "general_knowledge"
+      - "science"
+      - "history"
+      - "geography"
+      - "technology"
+
+  - id: "pubmed_open"
+    name: "PubMed Central Open Access Subset"
+    type: "api"
+    description: "Biomedical and life sciences literature from NIH"
+    endpoint: "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
+    db: "pmc"
+    enabled: false
+    requires_approval: true
+    min_confidence: 0.9
+    max_results_per_query: 10
+    rate_limit_rpm: 10
+    license: "public_domain"
+    attribution_required: true
+    domain_tags:
+      - "medicine"
+      - "biology"
+      - "health"
+
+  - id: "arxiv"
+    name: "arXiv Open Access Preprints"
+    type: "api"
+    endpoint: "https://arxiv.org/search/"
+    description: "Physics, mathematics, computer science, quantitative biology preprints"
+    enabled: false
+    requires_approval: true
+    min_confidence: 0.85
+    max_results_per_query: 5
+    rate_limit_rpm: 30
+    license: "non_commercial"
+    attribution_required: true
+    domain_tags:
+      - "physics"
+      - "mathematics"
+      - "computer_science"
+      - "quantitative_biology"
+
+  - id: "gov_data"
+    name: "U.S. Government Publications"
+    type: "api"
+    endpoint: "https://www.data.gov/",
+    description: "Official statistics, regulations, and public records"
+    enabled: false
+    requires_approval: true
+    min_confidence: 0.95
+    max_results_per_query: 10
+    rate_limit_rpm: 60
+    license: "public_domain"
+    attribution_required: true
+    domain_tags:
+      - "government"
+      - "statistics"
+      - "law"
+      - "economics"
+
+  - id: "user_documents"
+    name: "User-Provided Private Documents"
+    type: "local"
+    description: "Application-specific confidential documents uploaded by authorized users"
+    path: "knowledge/raw/user_uploads/"
+    enabled: true
+    requires_signature: true
+    min_confidence: 1.0,
+    license: "proprietary"
+    attribution_required: true
+    domain_tags:
+      - "internal"
+      - "confidential"
+    access_level: "restricted"
+    ingest_requires_auth: true
+
+api_connectors:
+  wikipedia:
+    api_url: "https://en.wikipedia.org/w/api.php"
+    rate_limit_rpm: 200
+    enabled: false
+    requires_approval: false
+
+  pubmed:
+    api_url: "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
+    rate_limit_rpm: 10
+    enabled: false
+    requires_approval: true
+    api_key_env: "PUBMED_API_KEY"  # Optional; increases rate limit
+
+llm:
+  primary:
+    provider: "openai"
+    model: "gpt-4-turbo-preview"
+    api_key_env: "OPENAI_API_KEY"
+    timeout: 30
+    max_retries: 3
+
+  fallback:
+    enabled: true
+    provider: "local"
+    model: "llama3:8b-instruct-q4_K_M"
+    endpoint: "http://localhost:11434/api/generate"
+    timeout: 60
+    max_retries: 1
+
+copyright_check:
+  enabled: true
+  copyrighted_works_corpus: "knowledge/raw/copyrighted_works/"  # Optional; empty = skip
+  similarity_threshold_bleu: 0.3
+  similarity_threshold_cosine: 0.6
+  check_window_chars: 50
+  block_on_match: true
+  allow_attributed_quotes: true
+
+freshness:
+  enforce_min_age_days: 90
+  refuse_if_corpus_older_than_days: 180
+  update_check_frequency_hours: 24
+  update_endpoint: null  # Configured by deployment

@@ -1,4 +1,4 @@
-Usage and CLI
+# Usage and CLI
 
 Basic usage
 

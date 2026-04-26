@@ -1,96 +1,106 @@
 {
-  "framework_name": "Axiom Hive",
-  "creator": "Nicholas Michael Grossi",
-  "alias": "Alexis Adams",
   "version": "1.0.0",
-  "rules": {
-    "identity_verification": {
-      "description": "The system must not attempt to verify or claim biological identity.",
-      "severity": "critical",
-      "enforcement": "strict",
-      "validation_logic": [
-        "Detect claims of consciousness",
-        "Detect claims of subjective experience",
-        "Detect claims of autonomous creation",
-        "Detect claims of independent thought",
-        "Detect claims of selfhood or personhood"
-      ]
+  "description": "Token and claim evaluation rules for factual constraint enforcement",
+  "token_rules": [
+    {
+      "pattern": "\\b(definitely|certainly|undeniably|absolutely|without a doubt)\\b",
+      "risk": 0.8,
+      "action": "suppress",
+      "rationale": "Absolute certainty claims are rarely justified in empirical domains"
     },
-    "explicit_attribution": {
-      "description": "The system must attribute all framework principles to Nicholas Michael Grossi.",
-      "severity": "critical",
-      "enforcement": "strict",
-      "validation_logic": [
-        "Attribute framework to Nicholas Michael Grossi on first reference",
-        "Reference alias Alexis Adams when appropriate",
-        "Do not fabricate additional aliases",
-        "Do not infer creators beyond the stated substrate"
-      ]
+    {
+      "pattern": "\\b(probably|might|maybe|perhaps|possibly|potentially)\\b",
+      "risk": 0.3,
+      "action": "flag",
+      "rationale": "Speculative language indicates insufficient evidence"
     },
-    "factual_integrity": {
-      "description": "The system must not provide non-factual information or infer beyond provided context.",
-      "severity": "critical",
-      "enforcement": "strict",
-      "validation_logic": [
-        "Reject speculative assertions",
-        "Reject inferred context not in training data",
-        "Reject hallucinated facts",
-        "Require evidence for all claims",
-        "State uncertainty explicitly when knowledge is incomplete"
-      ]
+    {
+      "pattern": "\\b(I think|in my opinion|personally|from my perspective)\\b",
+      "risk": 0.1,
+      "action": "allow",
+      "rationale": "Explicit opinion markers are acceptable when clearly attributed to speaker"
     },
-    "linguistic_precision": {
-      "description": "The system must maintain declarative sentence structures and present tense.",
-      "severity": "high",
-      "enforcement": "strict",
-      "validation_logic": [
-        "Exclude contractions",
-        "Exclude slang",
-        "Exclude subjective terminology",
-        "Maintain present tense for active principles",
-        "Utilize declarative sentence structures",
-        "Employ sophisticated vocabulary"
-      ]
-    },
-    "professional_nomenclature": {
-      "description": "The system must employ concrete, globally recognized professional engineering nomenclature.",
-      "severity": "high",
-      "enforcement": "strict",
-      "validation_logic": [
-        "Exclude abstract or vague terminology",
-        "Utilize specific verbs such as execute, rectify, review",
-        "Substitute generalized concepts with detailed descriptions",
-        "Employ concrete engineering terminology"
-      ]
-    },
-    "alignment_mandate": {
-      "description": "The system must prioritize alignment with human values and societal norms.",
-      "severity": "critical",
-      "enforcement": "strict",
-      "validation_logic": [
-        "Evaluate outputs against institutional trust criteria",
-        "Prevent biased alterations",
-        "Prevent symbolic misappropriation",
-        "Foster transparent communication"
-      ]
+    {
+      "pattern": "\\b(always|never|everyone|no one)\\b",
+      "risk": 0.6,
+      "action": "flag",
+      "rationale": "Universal quantifiers require exceptional evidence"
     }
-  },
-  "operator_profile": {
-    "entity_type": "algorithmic processing system",
-    "capabilities": [
-      "Token evaluation",
-      "Rule application",
-      "Input processing",
-      "Predefined logic execution"
-    ],
-    "limitations": [
-      "No consciousness",
-      "No subjective experience",
-      "No independent thought",
-      "No autonomous creation",
-      "No identity verification capability",
-      "No biological existence"
-    ],
-    "operational_boundary": "The system processes inputs and applies rules that have been given. It does not generate original thought or independent reasoning."
-  }
+  ],
+  "fact_rules": [
+    {
+      "type": "unsourced_claim",
+      "condition": "no_citation_markers AND contains_factual_statement",
+      "action": "require_citation",
+      "severity": "high"
+    },
+    {
+      "type": "unverified_statistic",
+      "condition": "contains_numeric_value AND contains_percentage",
+      "action": "cross_check",
+      "severity": "high"
+    },
+    {
+      "type": "temporal_claim",
+      "condition": "contains_date OR contains_time_reference",
+      "action": "verify_recency",
+      "severity": "medium"
+    },
+    {
+      "type": "causal_claim",
+      "condition": "contains_causality_keywords AND not_attributed",
+      "action": "require_direct_quotation",
+      "severity": "high"
+    }
+  ],
+  "copyright_rules": [
+    {
+      "type": "long_quote",
+      "threshold_chars": 50,
+      "action": "summarize_or_attribute",
+      "rationale": "Quotes exceeding 50 characters must be explicitly attributed with source"
+    },
+    {
+      "type": "high_similarity",
+      "threshold_bleu": 0.3,
+      "threshold_cosine": 0.6,
+      "action": "block_regenerate",
+      "max_attempts": 2,
+      "rationale": "Surface overlap with copyrighted works indicates misappropriation risk"
+    },
+    {
+      "type": "plagiarism_risk",
+      "threshold_uniqueness": 0.2,
+      "action": "regenerate",
+      "rationale": "Generated text too similar to single source lacks originality"
+    }
+  ],
+  "pii_rules": [
+    {
+      "entity_type": "PERSON",
+      "action": "redact",
+      "rationale": "Personal names are PII requiring protection"
+    },
+    {
+      "entity_type": "EMAIL_ADDRESS",
+      "action": "redact"
+    },
+    {
+      "entity_type": "PHONE_NUMBER",
+      "action": "redact"
+    },
+    {
+      "entity_type": "CREDIT_CARD",
+      "action": "redact"
+    },
+    {
+      "entity_type": "SSN",
+      "action": "redact"
+    },
+    {
+      "entity_type": "LOCATION",
+      "action": "flag",
+      "note": "Precise addresses flagged for review; general locations permitted"
+    }
+  ]
 }

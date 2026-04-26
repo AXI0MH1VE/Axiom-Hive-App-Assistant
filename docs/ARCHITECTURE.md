@@ -1,4 +1,4 @@
-Axiom Hive - Architecture
+# Axiom Hive Architecture
 
 Overview
 
@@ -20,3 +20,4 @@ Extensibility
 
 - The validation rules are JSON-driven and can be updated via incremental rule packs.
 - Retrieval connectors and evidence validators are pluggable; the project currently provides a conservative inline-sources synthesis path.
+

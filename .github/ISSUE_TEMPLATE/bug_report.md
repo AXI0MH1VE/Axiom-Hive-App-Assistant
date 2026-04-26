@@ -1,19 +1,32 @@
 ---
 name: Bug report
 about: Create a report to help us improve
+title: ''
+labels: bug
+assignees: ''
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+# Bug Report
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. 
-2. 
-3. 
+## Description
+A clear and concise description of the bug.
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## Steps to Reproduce
+1. Step one
+2. Step two
+3. Step three
 
-**Additional context**
+## Expected Behavior
+A clear description of what you expected to happen.
+
+## Actual Behavior
+A clear description of what actually happened.
+
+## Environment
+- OS: [e.g. Windows 11]
+- Python version: [e.g. 3.11]
+- Axiom Hive version: [e.g. 1.0.0]
+
+## Additional Context
 Add any other context about the problem here.
+

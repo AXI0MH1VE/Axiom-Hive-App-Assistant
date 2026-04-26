@@ -1,0 +1,159 @@
+[build-system]
+requires = ["setuptools>=68.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "verity-assistant"
+version = "0.1.0"
+description = "Factual AI assistant with zero tolerance for misappropriation"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Biological Human Leader", email = "authority@axiom-hive.local" }
+]
+keywords = ["ai", "llm", "factual", "rag", "governance", "audit"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["backend*", "frontend*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.git
+  | \.mypy_cache
+  | \.venv
+  | venv
+  | env
+  | node_modules
+  | \.pytest_cache
+  | build
+  | dist
+  | migrations
+)/
+'''
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+exclude = [
+    ".git",
+    ".venv",
+    "venv",
+    "env",
+    "node_modules",
+    "migrations",
+    "build",
+    "dist",
+    "__pycache__",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "S",   # flake8-bandit
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "DTZ", # flake8-datetimez
+    "T20", # flake8-print
+]
+ignore = [
+    "E501",  # line too long (handled by black)
+    "S101",  # assert used (ok in tests)
+    "S113",  # requests without timeout (handled separately)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+
+exclude = [
+    "migrations",
+    "node_modules",
+    ".venv",
+    "venv",
+    "env",
+    "build",
+    "dist",
+]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--tb=short",
+    "--cov=src/backend",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-fail-under=80",
+]
+filterwarnings = [
+    "error",
+    "ignore::UserWarning",
+    "ignore::DeprecationWarning",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["src/backend"]
+omit = [
+    "src/backend/__init__.py",
+    "src/backend/workers/*",
+    "tests/*",
+    "migrations/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+src_paths = ["src/backend"]
+skip = ["migrations", ".venv", "venv", "node_modules"]

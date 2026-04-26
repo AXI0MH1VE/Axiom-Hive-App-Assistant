@@ -1,0 +1,84 @@
+{
+  "version": "1.0.0",
+  "description": "Quantitative thresholds for retrieval, generation, validation, audit, and performance",
+  "retrieval": {
+    "top_k": 5,
+    "similarity_threshold": 0.65,
+    "min_results_high_confidence": 3,
+    "max_results": 20,
+    "bm25_weight": 0.3,
+    "vector_weight": 0.7,
+    "metadata_filter_required": false
+  },
+  "generation": {
+    "max_tokens": 1024,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0,
+    "stop_sequences": ["\n\nSources:", "Sources:", "\n\nI don't have enough verified information"],
+    "max_completion_tokens": 768,
+    "prompt_max_tokens": 2000
+  },
+  "validation": {
+    "nli_threshold": 0.8,
+    "entailment_min_score": 0.7,
+    "contradiction_threshold": 0.8,
+    "neutral_threshold": 0.6,
+    "copyright_bleu_threshold": 0.3,
+    "copyright_cosine_threshold": 0.6,
+    "plagiarism_threshold": 0.2,
+    "min_uniqueness_score": 0.8,
+    "max_regeneration_attempts": 2,
+    "fact_check_batch_size": 10
+  },
+  "audit": {
+    "retention_days": 365,
+    "hmac_key_rotation_days": 30,
+    "encryption_enabled": false,
+    "log_retention_policy": "append_only",
+    "backup_frequency_hours": 24,
+    "signature_algorithm": "HMAC-SHA256"
+  },
+  "performance": {
+    "timeout_retrieval_ms": 500,
+    "timeout_generation_ms": 3000,
+    "timeout_total_ms": 5000,
+    "cache_ttl_seconds": 3600,
+    "embedding_cache_size": 10000,
+    "max_concurrent_requests": 50,
+    "min_throughput_qps": 10
+  },
+  "intent_classification": {
+    "confidence_threshold": 0.85,
+    "rejection_keywords": [
+      "opinion",
+      "should i",
+      "best",
+      "favorite",
+      "recommend",
+      "think",
+      "feel",
+      "believe"
+    ],
+    "factual_indicators": [
+      "what is",
+      "how does",
+      "when did",
+      "who was",
+      "define",
+      "explain",
+      "causes of",
+      "history of"
+    ]
+  },
+  "confidence_scoring": {
+    "high_min_sources": 3,
+    "medium_min_sources": 1,
+    "high_min_consensus": 0.9,
+    "medium_min_consensus": 0.7,
+    "recency_weight_days": 365,
+    "source_reliability_weight": 0.3,
+    "consensus_weight": 0.7
+  }
+}

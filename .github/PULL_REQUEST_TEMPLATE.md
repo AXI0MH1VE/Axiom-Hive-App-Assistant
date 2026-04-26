@@ -1,14 +1,27 @@
+# Pull Request
+
 ## Summary
 
-Provide a concise description of the change and its rationale.
+Brief description of the changes.
 
-## Checklist
+## Motivation
 
-- [ ] The change is scoped and reversible.
-- [ ] Tests and validation pass locally.
-- [ ] Documentation updated as needed.
-- [ ] Attribution preserved where applicable.
+Why are these changes necessary?
+
+## Changes
+
+- Change one
+- Change two
+- Change three
 
 ## Testing
 
-Describe how to test the change.
+How were these changes tested?
+
+## Checklist
+
+- [ ] The code compiles and existing tests pass.
+- [ ] The change includes a concise description and rationale.
+- [ ] Documentation and help text are updated when behavior changes.
+- [ ] No confidential or proprietary material is included without proper permission.
+

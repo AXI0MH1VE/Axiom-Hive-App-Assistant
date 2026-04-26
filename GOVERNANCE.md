@@ -1,4 +1,4 @@
-Axiom Hive Governance
+# Governance
 
 This document describes governance principles for the Axiom Hive project.
 

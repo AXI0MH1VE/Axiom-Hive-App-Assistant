@@ -65,6 +65,7 @@ python src/app.py
 ```
 
 Available commands:
+
 - `/validate <text>` - Execute validation on the provided text
 - `/prompt` - Display the system prompt
 - `/summary` - Display session summary

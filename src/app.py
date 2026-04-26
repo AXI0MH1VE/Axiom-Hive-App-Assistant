@@ -62,11 +62,10 @@ def execute_interactive_mode(assistant: AxiomAssistant) -> None:
                 print("")
                 print("SESSION SUMMARY")
                 print(f"Framework: {summary['framework']}")
-                print(f"Creator: {summary['creator']}")
-                print(f"Entity Type: {summary['entity_type']}")
                 print(f"Total Interactions: {summary['total_interactions']}")
                 print(f"Compliant Interactions: {summary['compliant_interactions']}")
-                print(f"Non-Compliant Interactions: {summary['non_compliant_interactions']}")
+                print(f"Compliance Rate: {summary['compliance_rate']:.1%}")
+                print(f"Timestamp: {summary['timestamp']}")
                 print("")
             
             elif user_input.lower().startswith("/validate "):

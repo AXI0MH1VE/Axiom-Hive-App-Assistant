@@ -1,4 +1,4 @@
-Axiom Hive Code of Conduct
+# Code of Conduct
 
 Purpose
 

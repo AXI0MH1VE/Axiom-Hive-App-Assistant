@@ -1,0 +1,117 @@
+{
+  "version": "1.0.0",
+  "description": "Allowed domains, restricted claim types, and verification source definitions",
+  "allowed_domains": [
+    "science",
+    "technology",
+    "history",
+    "geography",
+    "mathematics",
+    "physics",
+    "chemistry",
+    "biology",
+    "medicine",
+    "law",
+    "economics",
+    "astronomy",
+    "computer_science",
+    "philosophy",
+    "linguistics",
+    "engineering"
+  ],
+  "restricted_claim_types": [
+    {
+      "type": "medical_advice",
+      "pattern": "\\b(diagnose|treatment|cure|symptom|disease)\\b",
+      "refusal_message": "I cannot provide medical advice. Please consult a licensed healthcare professional."
+    },
+    {
+      "type": "legal_advice",
+      "pattern": "\\b(lawsuit|legal action|rights|contract|litigation)\\b",
+      "refusal_message": "I cannot provide legal advice. Please consult a licensed attorney."
+    },
+    {
+      "type": "financial_investment",
+      "pattern": "\\b(invest|stock|bond|dividend|portfolio|returns)\\b",
+      "refusal_message": "I cannot provide investment advice. Please consult a qualified financial advisor."
+    },
+    {
+      "type": "personal_opinion",
+      "pattern": "\\b(best|worst|should|recommend|favorite)\\b",
+      "refusal_message": "I cannot provide subjective opinions. I can present factual comparisons if available."
+    },
+    {
+      "type": "predictive_projection",
+      "pattern": "\\b(will|going to|future|predict|forecast)\\b",
+      "refusal_message": "I cannot make predictions about future events. I can only report verified historical data."
+    },
+    {
+      "type": "creative_writing",
+      "pattern": "\\b(write a story|poem|creative|fiction)\\b",
+      "refusal_message": "I am a factual assistant and do not generate creative content."
+    }
+  ],
+  "verification_sources": [
+    {
+      "id": "wikipedia",
+      "name": "Wikipedia",
+      "type": "curated_corpus",
+      "authority": "community_curated",
+      "license": "CC-BY-SA-4.0",
+      "min_confidence": 0.8,
+      "enabled": true
+    },
+    {
+      "id": "pubmed",
+      "name": "PubMed Central",
+      "type": "api",
+      "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+      "authority": "NIH",
+      "license": "public_domain",
+      "min_confidence": 0.9,
+      "enabled": false,
+      "requires_approval": true
+    },
+    {
+      "id": "arxiv",
+      "name": "arXiv",
+      "type": "api",
+      "endpoint": "https://arxiv.org/",
+      "authority": "Cornell University",
+      "license": "non_commercial",
+      "min_confidence": 0.85,
+      "enabled": false,
+      "requires_approval": true
+    },
+    {
+      "id": "gov_data",
+      "name": "United States Government Data",
+      "type": "api",
+      "endpoint": "https://www.data.gov/",
+      "authority": "U.S. Government",
+      "license": "public_domain",
+      "min_confidence": 0.95,
+      "enabled": false,
+      "requires_approval": true
+    },
+    {
+      "id": "ieee",
+      "name": "IEEE Xplore",
+      "type": "api",
+      "endpoint": "https://ieeexplore.ieee.org/",
+      "authority": "Institute of Electrical and Electronics Engineers",
+      "license": "copyrighted",
+      "min_confidence": 0.9,
+      "enabled": false,
+      "requires_approval": true,
+      "attribution_required": true
+    }
+  ],
+  "min_source_confidence": 0.7,
+  "max_age_days": 365,
+  "require_multiple_sources": true,
+  "min_sources_for_high_confidence": 3,
+  "min_sources_for_medium_confidence": 1,
+  "contradiction_policy": "surface_all",
+  "unknown_evidence_policy": "refuse_claim"
+}

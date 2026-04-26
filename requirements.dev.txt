@@ -1,0 +1,38 @@
+# Development and testing dependencies
+-r requirements.txt
+
+# Additional dev tools
+pytest-xdist==3.5.0  # parallel test execution
+pytest-timeout==2.2.0
+pytest-env==1.1.1
+pytest-sugar==1.0.0
+
+# Type checking
+types-redis==4.6.0.11
+types-PyYAML==6.0.12.12
+
+# Linting & formatting extensions
+darglint==1.8.1  # docstring checker
+
+# Profiling
+pyinstrument==4.6.1
+memory-profiler==0.61.0
+
+# Debugging
+debugpy==1.8.1
+pdbpp==0.10.3
+
+# Documentation
+mkdocs==1.5.3
+mkdocs-material==9.5.7
+mkdocstrings[python]==0.24.0
+
+# Benchmarking & load testing
+locust==2.21.0
+
+# Browser automation for E2E tests
+playwright==1.45.1
+
+# Security scanning
+safety==3.1.0
+pip-audit==2.7.3

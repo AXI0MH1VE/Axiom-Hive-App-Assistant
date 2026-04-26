@@ -1,0 +1,85 @@
+{
+  "version": "1.0.0",
+  "description": "LLM provider configuration, model settings, and behavioral parameters",
+  "providers": {
+    "openai": {
+      "api_base": "https://api.openai.com/v1",
+      "default_model": "gpt-4-turbo-preview",
+      "available_models": [
+        "gpt-4-turbo-preview",
+        "gpt-4",
+        "gpt-4-0613",
+        "gpt-3.5-turbo",
+        "gpt-3.5-turbo-0613"
+      ],
+      "rate_limit_rpm": 500,
+      "rate_limit_tpm": 250000,
+      "timeout_seconds": 30,
+      "max_retries": 3,
+      "retry_delay_seconds": 1,
+      "api_key_env": "OPENAI_API_KEY",
+      "token_env": "OPENAI_TOKEN"
+    },
+    "anthropic": {
+      "api_base": "https://api.anthropic.com/v1",
+      "default_model": "claude-3-sonnet-20240229",
+      "available_models": [
+        "claude-3-opus-20240229",
+        "claude-3-sonnet-20240229",
+        "claude-3-haiku-20240307"
+      ],
+      "rate_limit_rpm": 200,
+      "rate_limit_tpm": 100000,
+      "timeout_seconds": 30,
+      "max_retries": 3,
+      "retry_delay_seconds": 1,
+      "api_key_env": "ANTHROPIC_API_KEY"
+    },
+    "local": {
+      "providers": {
+        "ollama": {
+          "base_url": "http://localhost:11434",
+          "generate_endpoint": "/api/generate",
+          "chat_endpoint": "/api/chat",
+          "tags_endpoint": "/api/tags",
+          "default_model": "llama3:8b-instruct-q4_K_M",
+          "available_models": [
+            "llama3:8b-instruct-q4_K_M",
+            "llama3:70b-instruct-q4_K_M",
+            "mistral:7b-instruct-q4_K_M",
+            "codellama:7b-instruct-q4_K_M"
+          ],
+          "timeout_seconds": 60,
+          "max_retries": 1
+        },
+        "llama_cpp": {
+          "lib_path": null,
+          "model_path": "models/ggml-llama3-8b-q4_K_M.gguf",
+          "n_ctx": 2048,
+          "n_batch": 512,
+          "n_threads": 4,
+          "use_gpu": false,
+          "timeout_seconds": 60
+        }
+      },
+      "default_provider": "ollama"
+    }
+  },
+  "default_provider": "openai",
+  "fallback_enabled": true,
+  "fallback_provider": "local",
+  "max_retries": 3,
+  "retry_delay_seconds": 1,
+  "backoff_multiplier": 2.0,
+  "request_timeout_seconds": 30,
+  "streaming_enabled": true,
+  "stream_chunk_size": 256,
+  "model_caching": true,
+  "cache_dir": "data/model_cache/",
+  "log_requests": true,
+  "log_responses": false,
+  "save_raw_prompts": false,
+  "max_prompt_tokens": 2000,
+  "max_completion_tokens": 768,
+  "token_budget_total": 2768
+}
